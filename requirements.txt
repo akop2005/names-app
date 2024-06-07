@@ -1,4 +1,4 @@
 altair
 pandas
 matplotlib
-streamlit
+streamlit==1.23.1
