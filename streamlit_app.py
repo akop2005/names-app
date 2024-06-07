@@ -1,40 +1,112 @@
-import altair as alt
-import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import streamlit as st
 
-"""
-# Welcome to Streamlit!
+def main():
+    url = "https://raw.githubusercontent.com/meule/names/master/names.csv"
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:.
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+    df = pd.read_csv(url)
 
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+    df['num'] = df['num'] / df['total']*100
 
-num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
+    df.drop('total', axis=1, inplace=True)
 
-indices = np.linspace(0, 1, num_points)
-theta = 2 * np.pi * num_turns * indices
-radius = indices
+    df_female = df[df['sex'] == 'Ж'].copy()
 
-x = radius * np.cos(theta)
-y = radius * np.sin(theta)
+    # Создание DataFrame для мужчин
+    df_male = df[df['sex'] == 'М'].copy()
 
-df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "idx": indices,
-    "rand": np.random.randn(num_points),
-})
+    df_female.drop('sex', axis=1, inplace=True)
+    df_male.drop('sex', axis=1, inplace=True)
+    df_w = pd.read_excel('w.xlsx')
+    df_m = pd.read_excel('m.xlsx')
+    df_w = df_w.drop(index=0).reset_index(drop=True)
+    df_m = df_m.drop(index=0).reset_index(drop=True)
 
-st.altair_chart(alt.Chart(df, height=700, width=700)
-    .mark_point(filled=True)
-    .encode(
-        x=alt.X("x", axis=None),
-        y=alt.Y("y", axis=None),
-        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))
+    df_w["NumberOfPersons"] = pd.to_numeric(df_w["NumberOfPersons"], errors='coerce').fillna(0).astype(int)
+
+    # Найдем количество имен для каждого года
+    names_per_year = df_w.groupby("Year")["NumberOfPersons"].sum().reset_index()
+    names_per_year.columns = ["year", "count_names"]
+
+    # Группируем данные по имени и году, затем считаем сумму NumberOfPersons для каждой группы
+    df_sumf = df_w.groupby(["Name", "Year"])["NumberOfPersons"].sum().reset_index()
+    df_sumf.columns = ['name', 'year', 'num']
+
+    # Объединяем с данными о количестве имен в каждом году
+    df_sumf = pd.merge(df_sumf, names_per_year, on='year')
+
+    # Делим значение num на количество имен в этом году
+    df_sumf['num'] = df_sumf['num'] / df_sumf['count_names']*100
+
+    # Удаляем временный столбец count_names
+    df_sumf.drop('count_names', axis=1, inplace=True)
+
+    df_m["NumberOfPersons"] = pd.to_numeric(df_m["NumberOfPersons"], errors='coerce').fillna(0).astype(int)
+    # Найдем количество имен для каждого года
+    names_per_year = df_m.groupby("Year")["NumberOfPersons"].sum().reset_index()
+    names_per_year.columns = ["year", "count_names"]
+
+    # Группируем данные по имени и году, затем считаем сумму NumberOfPersons для каждой группы
+    df_summ = df_m.groupby(["Name", "Year"])["NumberOfPersons"].sum().reset_index()
+    df_summ.columns = ['name', 'year', 'num']
+
+    # Объединяем с данными о количестве имен в каждом году
+    df_summ = pd.merge(df_summ, names_per_year, on='year')
+
+    # Делим значение num на количество имен в этом году
+    df_summ['num'] = df_summ['num'] / df_summ['count_names']*100
+
+    # Удаляем временный столбец count_names
+    df_summ.drop('count_names', axis=1, inplace=True)
+    merged_df_female = pd.concat([df_female, df_sumf], ignore_index=True)
+    merged_df_female['name'] = merged_df_female['name'].apply(lambda x: x.capitalize() if x.isupper() else x.lower().capitalize())
+    merged_df_female['name'] = merged_df_female['name'].replace('София, софья', 'София')
+    merged_df_female['name'] = merged_df_female['name'].replace('Софья', 'София')
+    merged_df_female = merged_df_female.groupby(['name', 'year'], as_index=False).agg({'num': 'sum'})
+
+    merged_df_male = pd.concat([df_male, df_summ], ignore_index=True)
+    merged_df_male['name'] = merged_df_male['name'].apply(lambda x: x.capitalize() if x.isupper() else x.lower().capitalize())
+    merged_df_male['name'] = merged_df_male['name'].replace('Аарон', 'Арон')
+    merged_df_male = merged_df_male.groupby(['name', 'year'], as_index=False).agg({'num': 'sum'})
+
+    # Streamlit interface
+    st.title('Процент имени по годам')
+
+    # Выбор имени для женщин
+    name_female = st.selectbox('Выберите имя для женщин', merged_df_female['name'].unique())
+
+    # Фильтрация данных по имени для женщин
+    df_name_female = merged_df_female[merged_df_female['name'] == name_female]
+    df_name_female.loc[:, 'year'] = df_name_female['year'].astype(int)  # Преобразуем годы в числовой формат
+    df_name_female = df_name_female.sort_values(by='year')  # Сортируем по году
+
+    # Построение графика для женщин
+    fig_female, ax_female = plt.subplots(figsize=(12, 8))
+    ax_female.plot(df_name_female['year'], df_name_female['num'], linestyle='-', label=name_female)
+    ax_female.set_xlabel('Год')
+    ax_female.set_ylabel('Процент')
+    ax_female.set_title('Процент имени по годам (Женщины)')
+    ax_female.legend()
+
+    name_male = st.selectbox('Выберите имя для мужчин', merged_df_male['name'].unique())
+
+    # Фильтрация данных по имени для мужчин
+    df_name_male = merged_df_male[merged_df_male['name'] == name_male]
+    df_name_male.loc[:, 'year'] = df_name_male['year'].astype(int)  # Преобразуем годы в числовой формат
+    df_name_male = df_name_male.sort_values(by='year')  # Сортируем по году
+
+    # Построение графика для мужчин
+    fig_male, ax_male = plt.subplots(figsize=(12, 8))
+    ax_male.plot(df_name_male['year'], df_name_male['num'], linestyle='-', label=name_male)
+    ax_male.set_xlabel('Год')
+    ax_male.set_ylabel('Процент')
+    ax_male.set_title('Процент имени по годам (Мужчины)')
+    ax_male.legend()
+
+    # Отображение графиков в Streamlit
+    st.pyplot(fig_female)
+    st.pyplot(fig_male)
+
+if __name__ == "__main__":
+    main()
