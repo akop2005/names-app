@@ -1,7 +1,6 @@
-!pip install matplotlib
 import pandas as pd
-import matplotlib.pyplot as plt
 import streamlit as st
+import matplotlib.pyplot as plt
 
 def main():
     url = "https://raw.githubusercontent.com/meule/names/master/names.csv"
