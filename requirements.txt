@@ -1,4 +1,4 @@
 altair
 pandas
-matplotlib==3.8.4
-streamlit==1.23.1
+matplotlib==3.9.0
+streamlit==1.35.0
