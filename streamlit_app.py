@@ -1,6 +1,6 @@
 import pandas as pd
-import streamlit as st
 import matplotlib.pyplot as plt
+import streamlit as st
 
 def main():
     url = "https://raw.githubusercontent.com/meule/names/master/names.csv"
