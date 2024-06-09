@@ -28,8 +28,8 @@
 # **Некоторые результаты**
 <center>
     <img src="https://github.com/akop2005/names-app/raw/main/pie%20chart.png" style="width:500px; height: 500px">
-    <img src="https://github.com/akop2005/names-app/raw/main/female%20percent.png" style="width:500px">
-    <img src="https://github.com/akop2005/names-app/raw/main/female%20russia.png" style="width:500px">
-    <img src="https://github.com/akop2005/names-app/raw/main/gagarin.png" style="width:500px">
+    <img src="https://github.com/akop2005/names-app/raw/main/female%20percent.png" style="width:700px">
+    <img src="https://github.com/akop2005/names-app/raw/main/female%20russia.png" style="width:700px">
+    <img src="https://github.com/akop2005/names-app/raw/main/gagarin.png" style="width:700px">
 </center>
 
