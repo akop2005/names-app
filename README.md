@@ -28,7 +28,7 @@
 # **Некоторые результаты**
 
 <div style="display: flex; justify-content: center;">
-    <img src="https://github.com/akop2005/names-app/raw/main/pie%20chart.png" style="width:300px; margin-right: 20px;">
+    <img src="https://github.com/akop2005/names-app/raw/main/pie%20chart.png" style="max-width:300px; margin-right: 20px;">
     <img src="https://github.com/akop2005/names-app/raw/main/female%20percent.png" style="width:400px;">
 </div>
 
