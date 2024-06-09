@@ -27,4 +27,4 @@
 ---
 # **Некоторые результаты**
 
-![Самые популярные женские имена](pie chart.png)
+![Самые популярные женские имена](https://github.com/akop2005/names-app/blob/main/pie%20chart.png)
