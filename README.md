@@ -32,4 +32,4 @@
 ![Самые популярные женские имена по регионам России](https://github.com/akop2005/names-app/blob/main/female%20russia.png)
 ![Пик имени Юрий](https://github.com/akop2005/names-app/blob/main/gagarin.png)
 
-<img src="https://github.com/akop2005/names-app/blob/main/pie%20chart.png" width="200" height="200" />
+<img src="https://github.com/akop2005/names-app/blob/main/pie%20chart.png" width="500" height="500" />
