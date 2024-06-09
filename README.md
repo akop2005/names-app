@@ -28,3 +28,6 @@
 # **Некоторые результаты**
 
 ![Самые популярные женские имена](https://github.com/akop2005/names-app/blob/main/pie%20chart.png)
+![Динамика популярности женских имен](https://github.com/akop2005/names-app/blob/main/female%20percent.png)
+![Самые популярные женские имена по регионам России](https://github.com/akop2005/names-app/blob/main/female%20russia.png)
+![Пик имени Юрий](https://github.com/akop2005/names-app/blob/main/gagarin.png)
