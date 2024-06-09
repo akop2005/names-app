@@ -28,11 +28,11 @@
 # **Некоторые результаты**
 <center>
     <img src="https://github.com/akop2005/names-app/raw/main/pie%20chart.png" style="width:400px; height: 400px">
-    <img src="https://github.com/akop2005/names-app/raw/main/female%20percent.png" style="width:400px; height: 400px; object-fit: cover;">
+    <img src="https://github.com/akop2005/names-app/raw/main/female%20percent.png" style="width:400px">
 </center>
 <div style="display: flex; justify-content: center;">
-    <img src="https://github.com/akop2005/names-app/raw/main/female%20russia.png" style="width:400px; height: 400px; object-fit: cover; margin-right: 20px;">
-    <img src="https://github.com/akop2005/names-app/raw/main/gagarin.png" style="width:400px; height: 400px; object-fit: cover;">
+    <img src="https://github.com/akop2005/names-app/raw/main/female%20russia.png" style="width:400px; object-fit: cover; margin-right: 20px;">
+    <img src="https://github.com/akop2005/names-app/raw/main/gagarin.png" style="width:400px; object-fit: cover;">
 </div>
 
 
