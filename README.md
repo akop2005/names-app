@@ -27,12 +27,9 @@
 ---
 # **Некоторые результаты**
 
-<div style="display: flex; justify-content: center;">
-    <img src="https://github.com/akop2005/names-app/raw/main/pie%20chart.png" style="width:400px; margin-right: 20px;">
-    <img src="https://github.com/akop2005/names-app/raw/main/female%20percent.png" style="width:400px;">
-</div>
+![Самые популярные женские имена](https://github.com/akop2005/names-app/blob/main/pie%20chart.png)
+![Динамика популярности женских имен](https://github.com/akop2005/names-app/blob/main/female%20percent.png)
+![Самые популярные женские имена по регионам России](https://github.com/akop2005/names-app/blob/main/female%20russia.png)
+![Пик имени Юрий](https://github.com/akop2005/names-app/blob/main/gagarin.png)
 
-<div style="display: flex; justify-content: center;">
-    <img src="https://github.com/akop2005/names-app/raw/main/female%20russia.png" style="width:400px; margin-right: 20px;">
-    <img src="https://github.com/akop2005/names-app/raw/main/gagarin.png" style="width:400px;">
-</div>
+<img src="https://github.com/akop2005/names-app/blob/main/pie%20chart.png" width="200" height="200" />
